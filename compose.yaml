@@ -1,0 +1,10 @@
+services:
+  mysql:
+    image: 'mysql:latest'
+    environment:
+      - 'MYSQL_DATABASE=brewery_monolith'
+      - 'MYSQL_PASSWORD=secret'
+      - 'MYSQL_ROOT_PASSWORD=very_secret'
+      - 'MYSQL_USER=brewery_monolith_user'
+    ports:
+      - '41695:3306'
