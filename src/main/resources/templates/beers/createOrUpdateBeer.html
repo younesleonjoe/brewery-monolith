@@ -10,12 +10,12 @@
     <form th:object="${beer}" class="form-horizontal" id="add-beer-form" method="post">
     <div class="form-group has-feedback">
         <input type="hidden" th:field="*{id}" />
-        <input type="hidden" th:field="*{createdDate}" />
+        <input type="hidden" th:field="*{createdAt}" />
         <input type="hidden" th:field="*{version}" />
         <input
                 th:replace="~{fragments/inputField :: input ('Beer Name', 'beerName', 'text')}" />
         <input
-                th:replace="~{fragments/selectField :: select ('Style', 'beerStyle', ${T(guru.sfg.brewery.web.model.BeerStyleEnum).values()})}" />
+                th:replace="~{fragments/selectField :: select ('Style', 'beerStyle', ${beerStyles})}" />
         <input
                 th:replace="~{fragments/inputField :: input ('UPC', 'upc', 'number')}" />
         <input

@@ -11,6 +11,10 @@ import org.hibernate.type.Type;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
+/*
+ * Catch order updates
+ * Put a hook on hibernate to capture a change of event
+ */
 @Slf4j
 @Component
 @RequiredArgsConstructor

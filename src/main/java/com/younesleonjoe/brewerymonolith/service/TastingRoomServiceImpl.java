@@ -35,7 +35,7 @@ public class TastingRoomServiceImpl implements TastingRoomService {
   public void placeTastingRoomOrder() {
 
     List<Customer> customerList =
-        customerRepository.findAllByNameLike(DefaultBreweryLoader.TASTING_ROOM);
+        customerRepository.findAllByNameContaining(DefaultBreweryLoader.TASTING_ROOM);
 
     if (customerList.size() != 1)
       log.error(

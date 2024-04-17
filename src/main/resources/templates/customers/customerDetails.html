@@ -12,12 +12,12 @@
 <table class="table table-striped" th:object="${customer}">
     <tr>
         <th>Name</th>
-        <td><b th:text="*{customerName}"></b></td>
+        <td><b th:text="*{name}"></b></td>
 
     </tr>
     <tr>
         <th>Registered On</th>
-       <td th:text="*{createdDate}" /></td>
+       <td th:text="*{createdAt}" /></td>
      <!--<td th:text="${#dates.format(*{createdDate}, 'dd-MMM-yyyy')}" /></td>-->
 
     </tr>

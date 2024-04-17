@@ -17,9 +17,9 @@
     <tbody>
     <tr th:each="customer : ${selections}">
         <td>
-            <a th:href="@{/customers/__${customer.id}__}" th:text="${customer.customerName}"/></a>
+            <a th:href="@{/customers/__${customer.id}__}" th:text="${customer.name}"/></a>
         </td>
-        <td th:text="${customer.createdDate}"/>
+        <td th:text="${customer.createdAt}"/>
 
     </tr>
     </tbody>

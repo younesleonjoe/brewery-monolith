@@ -3,6 +3,7 @@ package com.younesleonjoe.brewerymonolith.controller;
 import com.younesleonjoe.brewerymonolith.entity.Customer;
 import com.younesleonjoe.brewerymonolith.repository.CustomerRepository;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -33,11 +34,11 @@ public class CustomerController {
   public String processFindFormReturnMany(Customer customer, BindingResult result, Model model) {
 
     // ToDO: Add Service
-    List<Customer> customers = customerRepository.findAllByNameLike(customer.getName());
+    List<Customer> customers = customerRepository.findAllByNameContaining(customer.getName());
 
     if (customers.isEmpty()) {
 
-      result.rejectValue("customerName", "error.notFound", "Not Found");
+      result.rejectValue("name", "error.notFound", "Not Found");
       return "customers/findCustomers";
 
     } else if (customers.size() == 1) {
@@ -94,7 +95,16 @@ public class CustomerController {
       return "beers/createOrUpdateCustomer";
     } else {
       // ToDO: Add Service
-      Customer savedCustomer = customerRepository.save(customer);
+      Customer existingCustomer = customerRepository.findById(customer.getId())
+          .orElseThrow(() -> new RuntimeException("Customer not found with id: " + customer.getId()));
+      
+      if (!existingCustomer.getVersion().equals(customer.getVersion())) {
+        // Versions don't match, handle optimistic locking conflict
+        throw new RuntimeException("Optimistic locking conflict: Customer has been modified by another user.");
+      }
+      
+      existingCustomer.setName(customer.getName());
+      Customer savedCustomer = customerRepository.save(existingCustomer);
       return "redirect:/customers/" + savedCustomer.getId();
     }
   }

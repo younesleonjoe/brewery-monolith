@@ -23,7 +23,6 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -66,7 +65,7 @@ class CustomerControllerTest {
   @Test
   void processFindFormReturnMany() throws Exception {
 
-    when(customerRepository.findAllByNameLike(anyString())).thenReturn(customerList);
+    when(customerRepository.findAllByNameContaining(anyString())).thenReturn(customerList);
 
     mockMvc
         .perform(get("/customers").flashAttr("customer", customer))

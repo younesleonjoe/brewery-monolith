@@ -1,6 +1,7 @@
 package com.younesleonjoe.brewerymonolith.controller;
 
 import com.younesleonjoe.brewerymonolith.entity.Beer;
+import com.younesleonjoe.brewerymonolith.enums.BeerStyleEnum;
 import com.younesleonjoe.brewerymonolith.repository.BeerInventoryRepository;
 import com.younesleonjoe.brewerymonolith.repository.BeerRepository;
 import java.util.List;
@@ -77,6 +78,7 @@ public class BeerController {
   @GetMapping("/new")
   public String initCreateForm(Model model) {
     model.addAttribute("beer", Beer.builder().build());
+    model.addAttribute("beerStyles", BeerStyleEnum.values());
     return "beers/createBeer";
   }
 
@@ -104,6 +106,7 @@ public class BeerController {
 
     if (beerRepository.findById(id).isPresent()) {
       model.addAttribute("beer", beerRepository.findById(id).get());
+      model.addAttribute("beerStyles", BeerStyleEnum.values());
     }
     return "beers/createOrUpdateBeer";
   }

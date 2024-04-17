@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CustomerRepository extends JpaRepository<Customer, UUID> {
 
-  List<Customer> findAllByNameLike(String name);
+  List<Customer> findAllByNameContaining(String name);
 }
